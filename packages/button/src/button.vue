@@ -1,6 +1,7 @@
 <template>
   <button
     class="lv-button"
+    @click="handleClick"
     :class="[
       type ? 'lv-button--' + type : ''
     ]"
@@ -16,6 +17,11 @@ export default {
     type: {
       type: String,
       default: 'default'
+    }
+  },
+  methods:{
+    handleClick(evt) {
+      this.$emit('click', evt);
     }
   }
 }

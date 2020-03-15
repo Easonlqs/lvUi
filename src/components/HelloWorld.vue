@@ -2,7 +2,7 @@
   <div class="hello">
     <h1>以Vue为基础的UI组件库</h1>
     <div class="btnDemo">
-      <lv-button>默认按钮</lv-button>
+      <lv-button @click="showToast">默认按钮</lv-button>
       <lv-button type="primary">普通按钮</lv-button>
       <lv-button type="success">成功按钮</lv-button>
       <lv-button type="info">信息按钮</lv-button>
@@ -14,7 +14,12 @@
 
 <script>
 export default {
-  name: 'HelloWorld'
+  name: 'HelloWorld',
+  methods:{
+    showToast(){
+      this.$lvToast.show('Hell World！')
+    }
+  }
 }
 </script>
 
