@@ -9,6 +9,7 @@
     "lib": "vue-cli-service build --target lib --dest lib packages/index.js"
   },
   "dependencies": {
+    "async-validator": "^3.2.4",
     "core-js": "^3.6.4",
     "vue": "^2.6.11"
   },

@@ -1,8 +1,14 @@
 import LvButton from './button'
 import LvToast from './toast'
+import LvInput from './input'
+import LvForm from './form'
+import LvFormItem from './form-item'
 
 const components = {
-    LvButton
+    LvButton,
+    LvInput,
+    LvForm,
+    LvFormItem
 }
 
 const commonComs = {
