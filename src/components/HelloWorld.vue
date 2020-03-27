@@ -10,17 +10,16 @@
       <lv-button type="danger">危险按钮</lv-button>
     </div>
     <div class="demo">
-      <lv-form :model="form" :rules="rules" ref="form">
-        <lv-form-item label="用户名" prop="username">
-          <lv-input v-model="form.username" />
+      <lv-form ref="form" :model="form" :rules="rules">
+        <lv-form-item label="用户名" prop="name">
+          <lv-input v-model="form.name"></lv-input>
         </lv-form-item>
-        <lv-form-item label="密码" prop="password">
-          <lv-input v-model="form.password" />
-        </lv-form-item>
-        <lv-form-item label="确认密码" prop="checkPass">
-          <lv-input v-model="form.checkPass" />
+        <lv-form-item label="邮箱" prop="mail">
+          <lv-input v-model="form.mail"></lv-input>
         </lv-form-item>
       </lv-form>
+      <button @click="handleSubmit">提交</button>
+      <button @click="handleReset">重置</button>
     </div>
   </div>
 </template>
@@ -29,48 +28,37 @@
 export default {
   name: 'HelloWorld',
   data(){
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'))
-      } else {
-        if (this.form.checkPass !== '') {
-          this.$refs.form.validateField('checkPass')
-        }
-        callback()
-      }
-    }
-    var validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'))
-      } else if (value !== this.form.password) {
-        callback(new Error('两次输入密码不一致!'))
-      } else {
-        callback()
-      }
-    }
     return{
       form: {
-        username: '',
-        password: '',
-        checkPass: ''
+        name: '',
+        mail: ''
       },
       rules: {
-        username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        password: [
-          { validator: validatePass, trigger: 'blur' }
-        ],
-        checkPass: [
-          { validator: validatePass2, trigger: 'blur' }
-        ]
+        name: [
+            { required: true, message: '用户名不能为空', trigger: 'blur' }
+          ],
+          mail: [
+            { required: true, message: '邮箱不能为空', trigger: 'blur' },
+            { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+          ]
       }
     }
   },
   methods:{
     showToast(){
       this.$lvToast.show('Hell World！')
+    },
+    handleSubmit () {
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+         console.log('提交成功');
+        } else {
+          console.log('表单校验失败');
+        }
+      })
+    },
+    handleReset () {
+      this.$refs.form.resetFields();
     }
   }
 }
